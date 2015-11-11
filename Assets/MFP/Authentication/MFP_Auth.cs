@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using LitJson;
 
 public class MFP_Auth {
 	
@@ -20,17 +21,20 @@ public class MFP_Auth {
 		}
 		*/
 
-
+		ArrayList tokenLists = new ArrayList ();
 		Dictionary<string, object> tokens = new Dictionary<string, object>();
 		tokens.Add("provider", "email");
 		tokens.Add("email", user.email);
 		tokens.Add("password", user.pass);
+		tokenLists.Add (tokens);
 
 		Dictionary<string, object> bodyParams = new Dictionary<string, object>();
 		bodyParams.Add("username", user.userName);
-		bodyParams.Add("authTokens", tokens);
+		bodyParams.Add("authTokens", tokenLists);
 
-		HTTPRequest httpRequest = new HTTPRequest();
-		httpRequest.Post("players", bodyParams, successResponse, failResponse);
+		string bodyData = JsonMapper.ToJson (bodyParams);
+
+		HTTPRequest httpRequest = HTTPRequest.requestWithURL(MFP_API.i ().mfURL);
+		httpRequest.Post("players", bodyData, successResponse, failResponse);
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using LitJson;
+using System.Text;
 
 public class HTTPRequest : MonoBehaviour {
 
@@ -101,46 +102,34 @@ public class HTTPRequest : MonoBehaviour {
 
 	#endregion
 
-	public void Post(string handler, Dictionary<string, object> bodyParams, MFP_Callbacks.MFPResponseCallback res, MFP_Callbacks.MFPResponseCallback fail) {
+	public void Post(string handler, string bodyData, MFP_Callbacks.MFPResponseCallback res, MFP_Callbacks.MFPResponseCallback fail) {
+
+		string apiUrl =  MFP_API.i ().mfURL + handler;
+		string responseJson = "";
 		
-		//Debug.Log("Post message " + message);
-		Dictionary<string, object> fullMessageMap = emptyMessage();
-
-		string jsonMessage = JsonMapper.ToJson(fullMessageMap);
-
-		HTTPRequest request = HTTPRequest.requestWithURL(MFP_API.i ().mfURL  + handler);	
-
-		if (res != null) {
-			request.funcFinishCallback = (www) => {
-				JsonData data = JsonMapper.ToObject(www.text);
-				res(data);
-			};
+		Dictionary<string, string> headers = new Dictionary<string, string>();
+		headers.Add("Content-Type", "application/json");
+		headers.Add("Accept", "application/json");
+		headers.Add("X-API-KEY",  MFP_API.i ().APIKey);
+		byte[] pData = Encoding.ASCII.GetBytes(bodyData.ToCharArray());
+		
+		
+		WWW www = new WWW(apiUrl, pData, headers);
+			
+		while(!www.isDone){
+			Debug.Log(www.progress);
 		}
 		
-		if (fail != null) {
-			request.funcFailCallback = (www) => {
-				JsonData data = JsonMapper.ToObject(www.text);
-				res(data);
-			};
-		}
-
-		Dictionary<string, object> body = (Dictionary<string, object>) fullMessageMap["body"];
-		Dictionary<string, object> headers = (Dictionary<string, object>) fullMessageMap["header"];
-		foreach (KeyValuePair<string, object> entry in bodyParams)
+		if(www.error != null && www.error.Length > 0)
 		{
-			body[entry.Key] = entry.Value;
-		}	
-		//Dictionary<string,string> dicValues = new Dictionary<string, string>();
-		//dicValues["json"] = JsonMapper.ToJson(body);
-
-		Dictionary<string,string> headerValues = new Dictionary<string, string>();
-		foreach (KeyValuePair<string, object> entry in headers){
-			headerValues[entry.Key] = (string)entry.Value;
-		}	
-
-		request.POST(headerValues, body);
+			Debug.Log("There was an error getting the file - " + www.error);
+		} else {
+			Debug.Log(www.text);
+		}
+		Debug.Log("Post Response = " + responseJson); 
 	}
-	
+
+	/*
 	public void Post(string message, Dictionary<string, object> bodyParams, MFP_Callbacks.MFPResponseCallback res) {
 		this.Post(message, bodyParams, res, null);
 	}
@@ -156,28 +145,5 @@ public class HTTPRequest : MonoBehaviour {
 	public void Post(string message) {
 		this.Post (message, new Dictionary<string, object>(), null, null);	
 	}
-	
-	/* Sample MF message:
-		 {
-			  "_t": "mfmessage",
-			  "header": {
-			    "_t": "mfheader"
-			  },
-			  "body": {
-			    "_t": "pingReq"
-			  }
-		} 
 	*/
-	private Dictionary<string, object> emptyMessage() {
-
-		Dictionary<string, object> message = new Dictionary<string, object>();	
-
-		Dictionary<string, object> header = new Dictionary<string, object>();
-		header.Add("X-API-KEY", MFP_API.i ().APIKey);
-		header.Add("Content-Type","application/json");
-		header.Add("Accept", "application/json");
-		message["header"] = header;
-		message["body"] = new Dictionary<string, object>();
-		return message;
-	}
 }
