@@ -1,0 +1,51 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MFP/Network/HTTPRequest.cs">
+    <Files>
+      <File FileName="Assets/MFP/Authentication/MFP_Auth.cs" Line="34" Column="1" />
+      <File FileName="Assets/MFP/MFP_API.cs" Line="1" Column="1" />
+      <File FileName="Assets/MFP/MFP_Demo.cs" Line="1" Column="1" />
+      <File FileName="Assets/MFP/Network/HTTPRequest.cs" Line="122" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="MFP" expanded="True">
+              <Node name="Authentication" expanded="True" />
+              <Node name="Libs" expanded="True">
+                <Node name="LitJson" expanded="True" />
+              </Node>
+              <Node name="Network" expanded="True">
+                <Node name="HTTPRequest.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>control.Name</Value>
+          <Value>f.Name</Value>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/gonzalo/GIT/MFP/Assets/MFP/MFP_Demo.cs" line="92" />
+      <Breakpoint file="/Users/gonzalo/GIT/MFP/Assets/MFP/MFP_Demo.cs" line="96" />
+      <Breakpoint file="/Users/gonzalo/GIT/MFP/Assets/MFP/Network/HTTPRequest.cs" line="122" />
+      <Breakpoint file="/Users/gonzalo/GIT/MFP/Assets/MFP/Network/HTTPRequest.cs" line="115" />
+      <Breakpoint file="/Users/gonzalo/GIT/MFP/Assets/MFP/Network/HTTPRequest.cs" line="48" />
+      <Breakpoint file="/Users/gonzalo/GIT/MFP/Assets/MFP/Network/HTTPRequest.cs" line="107" />
+      <Breakpoint file="/Users/gonzalo/GIT/MFP/Assets/MFP/Network/HTTPRequest.cs" line="52" />
+      <Breakpoint file="/Users/gonzalo/GIT/MFP/Assets/MFP/Network/HTTPRequest.cs" line="44" />
+      <Breakpoint file="/Users/gonzalo/GIT/MFP/Assets/MFP/Network/HTTPRequest.cs" line="111" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
