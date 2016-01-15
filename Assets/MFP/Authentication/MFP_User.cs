@@ -44,6 +44,15 @@ public class MFP_User {
 		}
 	}
 
+	string _userID = null;
+	public string userID {
+		get {
+			return _userID;
+		}
+		set {
+			_userID = value;
+		}
+	}
 
 	public MFP_User createUser(string name, string email, string pass){
 
@@ -51,6 +60,14 @@ public class MFP_User {
 		this.email = email;
 		this.pass = pass;
 
+		return this;
+	}
+
+	public MFP_User loginUser(string email, string pass){
+
+		this.email = email;
+		this.pass = pass;
+		
 		return this;
 	}
 }

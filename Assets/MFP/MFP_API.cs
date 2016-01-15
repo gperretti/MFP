@@ -49,4 +49,10 @@ public class MFP_API : MonoBehaviour {
 		mf_user = new MFP_User().createUser(userName, email, pass);
 		mf_authentication.createAccount(mf_user, successResponse, errorResponse);
 	}
+	
+	public void loginUser(string email, string pass, MFP_Callbacks.MFPResponseCallback successResponse, MFP_Callbacks.MFPResponseCallback errorResponse){
+		
+		mf_user = new MFP_User().loginUser(email, pass);
+		mf_authentication.loginUser(mf_user, successResponse, errorResponse);
+	}
 }
